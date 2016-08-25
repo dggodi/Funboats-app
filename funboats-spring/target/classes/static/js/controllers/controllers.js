@@ -22,16 +22,7 @@ funBoatsApp.controller('IndexController', function($scope, $http, $routeParams) 
 		}
 	};
 	
-	/*
-	$http.get('api/users/home').then(function(response){
-		$scope.greeting = response.data;
-	});
 	
-	$http.get('api/users/list').then(function(response){
-		$scope.users = response.data;
-	});
-	*/
-
 });
 
 
@@ -47,60 +38,7 @@ funBoatsApp.controller('CrudController', function($scope, $http, $routeParams) {
 	*/
 });
 
-/*
-MainController.controller('CrudController', function($scope, $http, $routeParams, colorService) {
-	
-	$scope.getFilter = function(event){
-		 $scope.mainbgstyle = colorService.getColor();
-	}
-	
-});
 
-MainController.service('colorService', function){
-	this.getColor = function(){
-		return "white";
-	}
-});
-/*
-// Default values for the request.
-		  var config = {
-		    params : {
-		      'callback' : 'JSON_CALLBACK',
-		      'brand' : $scope.brand,
-		      'capacity' : $scope.capacity,
-		      'year' : $scope.year,
-		      'cost' : $scope.cost
-		    },
-		  };
 
-		  // Perform JSONP request.
-		  var $promise = $http.jsonp('response.json', config)
-		    .success(function(data, status, headers, config) {
-		      if (data.status == 'OK') {
-		        $scope.brand = null;
-		        $scope.capacity = null;
-		        $scope.year = null;
-		        $scope.cost = null;
-		        $scope.messages = 'Your form has been sent!';
-		        $scope.submitted = false;
-		      } else {
-		        $scope.messages = 'Oops, we received your request, but there was an error processing it.';
-		        $log.error(data);
-		      }
-		    })
-		    .error(function(data, status, headers, config) {
-		      $scope.progress = data;
-		      $scope.messages = 'There was a network error. Try again later.';
-		      $log.error(data);
-		    })
-		    .finally(function() {
-		      // Hide status messages after three seconds.
-		      $timeout(function() {
-		        $scope.messages = null;
-		      }, 3000);
-		    });
-	};
-	
-*/
 
 
