@@ -1,0 +1,35 @@
+<section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
+	<div id="signUpPanel" class="panel panel-default panel-transparent">
+		<div class="panel-heading panel-heading-form">
+			<h3>Login</h3><div>{{message}}</div>
+		</div>
+		<div class="panel-body">
+			<div>
+				<form name="loginForm" class="form-horizontal form-tranparent">
+					<div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 ">
+					<div class="form-group"	>
+						<label for="usernameInput" ><span class=" form-required">*</span>User Name:</label>
+							<div>	
+						    	<input type="text" id="username" class="form-control" 
+						    		data-ng-model="event.username" required name='usernameInput'>
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="passwordInput" ><span class=" form-required">*</span>Password:</label>
+							<div>	
+						    	<input type="password" id="password" class="form-control" 
+						    	required data-ng-model="event.password" name='passwordInput' >
+						    </div>
+					</div>
+		
+					<div>
+						<button type="submit" class="btn btn-success" data-ng-disabled="newUserForm.$invalid" 
+								class="btn btn-primary" data-ng-click= "loginEvent(event, logInForm)">Sign Up</button>
+					</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</section>

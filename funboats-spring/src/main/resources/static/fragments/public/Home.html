@@ -1,0 +1,112 @@
+			<section id="leftSideBar" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				
+				<div class="row panel visible-md visible-lg">
+					<div id="imgCarousel" class="carousel slide" data-interval="4000">
+						
+						<ol class="carousel-indicators">
+							<li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#imgCarousel" data-slide-to="1" ></li>
+							<li data-target="#imgCarousel" data-slide-to="2" ></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="images/image1.jpg" alt="1" class="img-responsive" />
+							</div>
+							<div class="item">
+								<img src="images/image2.jpg" alt="2" class="img-responsive" />
+							</div>
+							<div class="item">
+								<img src="images/image3.jpg" alt="3" class="img-responsive" />
+							</div>
+						</div>
+						
+						<a href="#imgCarousel" class="carousel-control left" data-slide="prev">
+							<span class="icon-prev"></span></a>
+						<a href="#imgCarousel" class="carousel-control right" data-slide="next">
+							<span class="icon-next"></span></a>
+					</div>
+				</div>
+			</section>
+			
+			
+			<section id="rightSideBar" class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+
+					<div id="search-panel" >
+						<div>
+							<h2 id="search-header">Search</h2>
+						</div>
+						<hr />
+						<div class="row">
+							<form name="searchEventForm" class="form-horizontal">
+								<div class="form-group">
+						    		<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Brand</label>
+						    		<div class="col-lg-7 col-md-7  col-sm-8 col-xs-8">
+							    		<select class="control-label form-group" data-ng-model="event.brand" >
+							    			<option value="Yamaha">Yamaha</option>
+							                <option value="Honda">Honda</option>
+							                <option value="Kawasaki">Kawasaki</option>
+							                <option value="Sea-Doo">Sea-Doo</option>
+							    		</select>
+						    		</div>
+						    	</div>
+						    	<div class="form-group">
+						    		<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">PWC Category</label>
+						    		<div class="col-lg-7 col-md-7  col-sm-8 col-xs-8">
+						    			<select class="control-label form-group" data-ng-model="event.capacity" >
+						    				<option value="Passenger Standup">Passenger Standup</option>
+							                <option value="1 Passenger Runabout">1 Passenger</option>
+							                <option value="2 Passenger Runabout">2 Passenger</option>
+							                <option value="2-3 Passenger Runabout">2-3 Passenger</option>
+						    			</select>
+						    		</div>
+						    	</div>
+						    	<div class="form-group"	>
+						    		<label for="yearInput" class="control-label col-md-2 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Year</label>
+						    		<div class="col-md-8  col-sm-8 col-xs-8 ">	
+						    			<input type="range" id="myYear" class="form-control" data-ng-model="event.year" name='yearInput' min="2000" max="2014">
+						    		</div>
+						    	</div>
+						    	
+						    	<div class="form-group"	>
+						    		<label for="costInput" class="control-label col-md-2 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Cost</label>
+						    		<div class="col-md-8  col-sm-8 col-xs-8 ">
+						    			<input type="range" id="myRange" name="costInput" data-ng-model="event.cost" class="form-control">
+						    		</div>
+						    	</div>	
+							</form>
+						</div>
+						<hr />
+						<button type="submit" class="btn btn-success" data-ng-click="searchEvent(event, searchEventForm)">Search</button>
+					</div>	
+			</section>	
+			<section class="col-lg-12 col-md-12 xol-sm-12 col-xs-12">
+				<div class="spacing-vertical">
+				<h2 id="page-title">Jet Ski</h2>
+				<p class="text-default">Quick and easy way to sell your water craft</p>
+				<p class="lead">
+					Fun Boats provide easy-to-search listings of used jet ski and 
+					personal wave runners for sale. 
+				</p>
+				<p>	
+					Find stand-up models, high 
+					performance models, and luxury cruiser personal watecraft for 
+					sale in your area. FunBoats.com provides classifieds listings 
+					for used personal watercrafts that are private owned.
+				</p>
+				</div>
+			</section>
+<!--  <div data-ng-controller="IndexController" data-ng-cloak class="ng-cloak">
+  <p>The ID is {{greeting.id}}</p>
+  <p>The content is {{greeting.content}}</p>
+</div>-->
+<div>
+	<ul>
+		<li data-ng-repeat="user in users">
+			<div>
+				<span>name:{{user.userName}}</span><br/>
+				<span>password:{{user.password}}</span>
+			</div>
+		</li>
+	</ul>
+</div>

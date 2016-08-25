@@ -1,0 +1,95 @@
+<section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
+	<div id="signUpPanel" class="panel panel-default panel-transparent">
+		<div class="panel-heading panel-heading-form">
+			<h3>Sign Up</h3>
+		</div>
+		<div class="panel-body">
+			<div>
+				<form name="newUserForm" class="form-horizontal form-tranparent">
+					<div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 ">
+					<div class="form-group"	>
+						<label for="emailInput" ><span class=" form-required">*</span>Email Address:</label>
+							<div>	
+						    	<input type="text" id="email" class="form-control" 
+						    		required data-ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/" 
+						    		data-ng-model="event.email" data-ng-blur="checkEmail($event)" name='emailInput'
+						    		data-ng-class="emailstyle" >
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="passwordInput" ><span class=" form-required">*</span>Password:</label>
+							<div>	
+						    	<input type="password" id="password" class="form-control" required 
+						    	data-ng-model="event.password" name='passwordInput' 
+						    	data-ng-class="passwordstyle" data-ng-keyup="checkPassword($event)">
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="passwordVerifyInput" ><span class=" form-required">*</span>Password:</label>
+							<div>	
+						    	<input type="password" id="passwordVerify" class="form-control" required 
+						    	data-ng-model="event.passwordVerify" name='passwordVerifyInput' 
+						    	data-ng-class="passwordstyle" data-ng-keyup="checkPassword($event)">
+						    </div>
+					</div>
+					<div id="password-block-sm" class = "mes mes-sm visible-sm visible-xs">
+						<div>
+							<strong>Password. . .</strong><span id="passwordType"></span>
+						</div>
+						<div id="passwordmeter" data-ng-class="passwordMeter"></div>
+						
+					</div>
+					<div class="form-group"	>
+						<label for="firstNameInput" ><span class="form-required">*</span>First Name:</label>
+							<div>	
+						    	<input type="text" id="firstName" class="form-control" required 
+						    	data-ng-model="event.firstName" name='firstNameInput' required data-ng-pattern="/^[A-Za-z]{3,20}$/" 
+						    	data-ng-class="firstNameStyle" data-ng-blur="checkFirstName($event)">
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="lastNameInput" ><span class="form-required">*</span>Last Name:</label>
+							<div>	
+						    	<input type="text" id="lastName" class="form-control" required data-ng-model="event.lastName" 
+						    	name='lastNameInput'  required data-ng-pattern="/^[A-Za-z]{3,20}$/" 
+						    	data-ng-class="lastNameStyle" data-ng-blur="checkLastName($event)">
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="phoneNumberInput" >Phone Number:</label>
+							<div>	
+						    	<input type="text" id="phoneNumber" class="form-control" placeholder="(xxx)xxx-xxxx" 
+						    	data-ng-model="event.phoneNumber" name="phoneNumberInput" 
+						    	data-ng-class="phoneNumberStyle" data-ng-keyup="checkPhoneNumber($event)">
+						    </div>
+					</div>
+					<div class="form-group"	>
+						<label for="mobileNumberInput" >Mobile Number:</label>
+							<div>	
+						    	<input type="text" id="mobileNumber" class="form-control" placeholder="(xxx)xxx-xxxx" 
+						    	data-ng-model="event.mobileNumber" name="mobileNumberInput" 
+						    	data-ng-class="mobileNumberStyle" data-ng-keyup="checkMobileNumber($event)">
+						    </div>
+					</div>
+							<!-- data-ng-click="addUserEvent()"  -->			
+					<div>
+						<button type="submit" class="btn btn-success" data-ng-disabled="newUserForm.$invalid" 
+								data-ng-click= "addUserEvent(event, newUserForm)" class="btn btn-primary">Sign Up</button>
+						<button type="button" class="btn btn-success" data-ng-click="cancelSignUp()" >Cancel</button>
+					</div>
+					</div>
+					
+					<div id="password-block-sm" class="hidden-sm hidden-xs col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 ">
+						<div >
+							<strong>Password. . .</strong><span id="passwordType"></span>
+						</div>
+						<div id="passwordmeter" data-ng-class="passwordMeter"></div>
+						
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</section>
