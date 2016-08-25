@@ -36,38 +36,3 @@ funBoatsApp.config(function($routeProvider, $locationProvider){
 		});
 		$locationProvider.html5Mode(true);
 	});
-
-
-
-
-	
-
-	/*
-	$routeProvider.when('/', {
-		templateUrl: '/fragments/Index.html',
-		controller: 'IndexController'
-	})
-	.otherwise({
-		redirectTo: '/'
-	});
-});*/
-/*var funBoatsApp=angular.module('funBoatsApp', [])
-.controller('HomeController', function($scope) {
-  $scope.greeting = {id: 'xxx', content: 'Hello World!'}
-});
-// 'mainController'
-var funBoatsApp = angular.module('funBoatsApp', [
-	 'ngRoute', 'MainController'
-	])
-	.config(function($routeProvider){
-		//$locationProvider.html5mode(true);
-		
-		$routeProvider.when('/', {
-			templateUrl: '/fragments/Index.html',
-			controller: 'IndexController'
-		})
-		.otherwise({
-			redirectTo: '/'
-		});
-	});
-*/

@@ -51,14 +51,33 @@ funBoatsApp.factory("LoginService", function($http, $location, Message){
 		.then(function(response) {
 			if(response.status == "200")
 				$location.path( "/welcome" );
-			else
+			else{
+				Message.setMessage("Sorry...Login Unsuccesful");
 				$location.path( "/login" );
+				}	
 			},
 			function(response){
-				Message.setMessage("Sorry...Login Unsuccesful");
 				$location.path( "/login" );
 			});
 	}
 });
+
+funBoatsApp.factory("UserService", function($http, $location, Message){
+	return{
+		logout: function(){
+			$http.post('/logout')
+			.then(function(response){
+				if(response.status == "200"){
+					$location.path( "/login" )
+					window.location.reload();
+				}
+				else{
+					Message.setMessage("Sorry...Logout was Unsuccesful");
+					$location.path( "/login" )
+				}
+			})
+		}
+	}
+}
 
 

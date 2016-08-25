@@ -7,7 +7,7 @@ funBoatsApp.controller('LoginController', function($scope, $http, $location, Mes
 		
 	$scope.loginEvent = function(event, loginForm){ 
 		console.log("LoginService");
-		//LoginService.authenticate();
+		LoginService.authenticate();
 	}
 });
 

@@ -4,20 +4,6 @@ funBoatsApp.controller('MainController', function($scope, $routeParams) {
 
 	$scope.copywrite = new Date().getFullYear();
 	
-	$scope.loginEvent = function(event, mainHeaderLogin){
-		//console.log("MainController");
-		//LoginService.authenticate;
-		/*var user = {
-				name: $scope.main.username,
-				password: {name: $scope.main.password}
-			}
-		LoginService.getByUserName(user)
-		.then(function (user){
-			console.log("Login ");
-		});*/
-	}
-	
-	var testMain = "";
 });
 
 
