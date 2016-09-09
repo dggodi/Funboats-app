@@ -172,19 +172,17 @@ funBoatsApp.run(function ($rootScope, $location, $http, AuthenticateService, Ses
 	$rootScope.$on('event:auth-loginConfirmed', function(event, data){
 		$rootScope.loadingAccount = false;
 		var nextLocation = ($rootScope.requestedUrl ? $rootScope.requestUrl : "/welcome");
-		console.log('login confirmed start: nextLocation ' + nextLocation);
 		var delay = ($location.path() === "/loading" ? 1500 : 0);
 	
 		$timeout(function (){
 			SessionService.create(data);
 			$rootScope.account = SessionService;
 			$rootScope.authenticated = true;
-			console.log('login confirmed start: timeout ' + nextLocation);
 			$location.path(nextLocation).replace();
 		}, delay);
 	});
 	
-	/***
+	/*
 	 *  Executes when 401 is returned by the server
 	 */ 
 	$rootScope.$on('event:auth-loginRequired', function(event, data){
@@ -212,9 +210,7 @@ funBoatsApp.run(function ($rootScope, $location, $http, AuthenticateService, Ses
 		
 	});
 	
-	/*
-	 *  Executes when user logs out
-	 *  
+	/***
 	 *  note: redirects to login page
 	 */ 
 	$rootScope.$on('event:auth-loginCancelled', function(){

@@ -5,7 +5,6 @@
  * note: controls member links and views by location and search
  */
 funBoatsApp.controller('MemberMainController', function($rootScope, $scope, $location, SessionService, StorageService, ItemService) {
-	console.log("MemberMainController");
 	$scope.$parent.mainbgstyle = 'white';
 	
 	$scope.event.user = SessionService.getLogin();
@@ -66,10 +65,15 @@ funBoatsApp.controller('MemberMainController', function($rootScope, $scope, $loc
 /*
  * controller for displaying search results, also for editing, viewing and deleting
  */
-funBoatsApp.controller('ViewItemsController', function($rootScope, $scope, $location, ItemService, SessionService, StorageService){
+funBoatsApp.controller('ViewItemsController', function($rootScope, $scope, $location, ItemService, SessionService, StorageService, Message){
 	$scope.$parent.mainbgstyle = 'white';
 	$scope.items = [];
+	
+	// get current user in session
 	$scope.session = SessionService.getLogin();	
+	
+	// retrieves stored message
+	$scope.message = Message.getMessage().mes;
 	
 	// return full list of stored record is empty
 	if( StorageService.isEmpty() ){
@@ -135,7 +139,7 @@ funBoatsApp.controller('ViewItemsController', function($rootScope, $scope, $loca
 /*
  * controller for editing jetskis
  */
-funBoatsApp.controller('AddItemController', function($rootScope, $scope,  $location, ItemService, SessionService, DropDownListService, StorageService){
+funBoatsApp.controller('AddItemController', function($rootScope, $scope,  $location, ItemService, SessionService, DropDownListService, StorageService, Message){
 	$scope.$parent.mainbgstyle = 'white';
 
 	// construct drop downlists
@@ -211,7 +215,10 @@ funBoatsApp.controller('AddItemController', function($rootScope, $scope,  $locat
 	$scope.editItem = function(){	
 		var rec = createJson($scope.items);
 		ItemService.update(rec).then(function(data){
-			$scope.success(rec);
+			if(data)
+				$scope.success(rec, "Record has been updated");
+			else
+				$scope.fail("Record has not been updated");
 		});		
 	}
 	
@@ -223,9 +230,18 @@ funBoatsApp.controller('AddItemController', function($rootScope, $scope,  $locat
 	}
 	
 	/*
+	 * relocate to view without updated
+	 */
+	$scope.fail = function(mes){
+		Message.setMessage(mes, true);
+		$location.path('/view');
+	}
+	
+	/*
 	 * store new item to view 
 	 */
-	$scope.success = function(data){
+	$scope.success = function(data, mes){
+		Message.setMessage(mes, true);
 		StorageService.store([data]);
 		$location.path('/view');
 	}

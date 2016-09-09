@@ -1,8 +1,11 @@
 'use strict'
-
+/*
+ * stores messages for replying to user about query status
+ */
 funBoatsApp.factory("Message", function($rootScope){
 	var currentMessage = {};
 	
+	// initializes message listening service
 	initService();
 	
 	return {
@@ -19,13 +22,18 @@ funBoatsApp.factory("Message", function($rootScope){
 		}
 	}
 	
+	/*
+	 * listens for event based on query status
+	 */
 	function initService(){
 		$rootScope.$on('$locationChangeStart', function(){
 			return clearMessage();
 		});
 		
+		/*
+		 * clear message if location changes
+		 */
 		function clearMessage(){
-			console.log("currentMessage.status =  " + currentMessage.status);
 			if(currentMessage.status){
 				if(!currentMessage.locationChange)
 					currentMessage = {};
@@ -36,12 +44,14 @@ funBoatsApp.factory("Message", function($rootScope){
 	}
 });
 
+/*
+ * stores session service
+ */
 funBoatsApp.service("SessionService", function(){	
 	this.create = function (data){
 		if(data.data == null)
 			this.invalidate();
 		else{
-			console.log("SessionService :: create  " + data.data.details.sessionId);
 			this.id = data.data.details.sessionId;
 			this.login = data.data.principal.username;
 			this.userRoles = [];
@@ -61,10 +71,14 @@ funBoatsApp.service("SessionService", function(){
 	return this;
 });
 
+/*
+ * user Authenticate service for login, logout and authorzing 
+ * note: calls backend for DB service
+ */
 funBoatsApp.factory("AuthenticateService", function($rootScope, $http, $resource, authService, SessionService){	
 	return {
 		login: function (username, password){
-			console.log("AuthenticateService :: login  " + username + "  " + password);
+
 			var config = {
 				obj:{
 					username: username,
@@ -74,13 +88,11 @@ funBoatsApp.factory("AuthenticateService", function($rootScope, $http, $resource
 			};
 			
 			$http.post('/authenticate/', '', config).then(function(response){
-				console.log("AuthenticateService :: login succes " + response.status );
 				authService.loginConfirmed(response);
 			},
 			
 			function(response){
 				$rootScope.authenticationError = true;
-				console.log("AuthenticateService :: login fail " + response.status );
 				SessionService.invalidate();
 			});		
 		},
@@ -120,12 +132,16 @@ funBoatsApp.factory("AuthenticateService", function($rootScope, $http, $resource
 	}
 });
 
+/*
+ * user Registration service used for registering new user
+ * note: calls backend for DB service
+ */
 funBoatsApp.factory("RegistrationService", function($http, $location, $q, Message){
 	return{
 		register: function(obj){
 			$http.post('/api/users/new/', obj)
 			.then(function(response) {
-				Message.setMessage("Registration Succesful", true);
+				Message.setMessage("...Registration Succesful", true);
 				$location.path( "/login" );
 			},
 			function(response){
@@ -143,6 +159,9 @@ funBoatsApp.factory("RegistrationService", function($http, $location, $q, Messag
 	}
 });
 
+/*
+ * stores responses from DB for scope changes
+ */
 funBoatsApp.factory("StorageService", function($q){
 	var rec = [];
 	
@@ -163,8 +182,13 @@ funBoatsApp.factory("StorageService", function($q){
 	}
 });
 
+/*
+ * item service used for crud operations for jetskis
+ * note: calls backend for DB service
+ */
 funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 	return {
+		// gets full list
 		view: function(){
 			var deferred = $q.defer();
 			$http.get('/api/jetskis/list/').then(function(response){
@@ -172,6 +196,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// gets list by id
 		viewById: function(id){
 			var deferred = $q.defer();	
 			$http.post('/api/jetskis/list/id', {id: id}).then(function(response){
@@ -179,6 +205,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// gets list by location
 		viewByLocation: function(search){
 			var deferred = $q.defer();	
 			$http.post('/api/jetskis/location/search', {search: search}).then(function(response){
@@ -186,6 +214,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// saves new jetski
 		save: function(data){
 			var deferred = $q.defer();
 			$http.post('/api/jetskis/add/', data).then(function(response){
@@ -193,6 +223,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// update jetski
 		update: function(data){
 			var deferred = $q.defer();
 			$http.post('api/jetskis/update/', data).then(function(response){
@@ -200,6 +232,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			})
 			return deferred.promise;
 		},
+		
+		// delete jetski
 		remove: function(id){
 			var deferred = $q.defer();	
 			$http.post('/api/jetskis/delete/', {id: id}).then(function(response){
@@ -207,6 +241,8 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// search for jetski based on LIKE option
 		search: function(data){
 			var deferred = $q.defer();	
 			$http.post('/api/jetskis/search/like/', {obj: data}).then(function(response){
@@ -214,18 +250,20 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 			});
 			return deferred.promise;
 		},
+		
+		// search based on a combination of properties
 		searchByFilter: function(data){
-			console.log("MainController :: searchByFilter  2  " + data.brand);
 			var deferred = $q.defer();
 			$http.post('/api/jetskis/search/filter/', data).then(function(response){
 				deferred.resolve(response.data);
 			});
 			return deferred.promise;
 		},
+		
+		// retreives all locations
 		getLocations: function(){
 			var deferred = $q.defer();	
 			$http.get('/api/locations/list/').then(function(response){
-				console.log("ViewItemsController locations http ");
 				deferred.resolve(response.data);
 			});
 			return deferred.promise;
@@ -233,14 +271,21 @@ funBoatsApp.factory("ItemService", function($http, $q, StorageService){
 	}
 });
 
+/*
+ * constructs dropdown lists
+ */
 funBoatsApp.factory("DropDownListService", function($http){	
 	return {
+		
+		// dropdown lists based on array input
 		getColors: function(key, data){
 			var colors = []
 			for(var i = 0; i < data.length; i++)
 				colors.push({"id":i, [key]:data[i]});
 			return colors;
 		},
+		
+		// drop down for yeasrs
 		getYears: function(limit, key){
 			var years = [];
 			var year = limit;
@@ -249,6 +294,9 @@ funBoatsApp.factory("DropDownListService", function($http){
 			
 			return years;
 		},
+		
+		// drop down displays a range of numbers with a factor
+		// note: also constructs a generic key
 		getByFactor: function(limit, key, factor){
 			var costs = [];
 			for(var i = 1; i <= limit ; i++)
@@ -256,6 +304,8 @@ funBoatsApp.factory("DropDownListService", function($http){
 			
 			return costs;
 		},
+		
+		// drop down displays a range of numbers
 		get: function(limit, value){
 			var rec = [];
 			for(var i = 0; i <= limit ; i++)
@@ -263,6 +313,8 @@ funBoatsApp.factory("DropDownListService", function($http){
 	
 			return rec;
 		},
+		
+		// gets matching selected value
 		getSelectedValue: function(rec, searchKey, searchValue){		
 			for(var i = 0; i < rec.length; i++){
 				if(rec[i][searchKey] == searchValue)
@@ -272,6 +324,10 @@ funBoatsApp.factory("DropDownListService", function($http){
 	}
 });
 
+/*
+ * service for reading and image
+ * not applied until for later updates
+ */
 funBoatsApp.service('ImageService', function($q) {
 	return{
 		convertToBytes: function(file){
