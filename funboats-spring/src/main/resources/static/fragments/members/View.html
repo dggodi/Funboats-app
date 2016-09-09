@@ -1,0 +1,113 @@
+<section id="section-layout-left" class="col-lg-12 col-md-12 xol-sm-12 col-xs-12">
+
+	<div class="table-responsive">
+	<table id="data-table" class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Member</th>
+				<th>Location</th>
+				<th>Brand</th>
+				<th>Model</th>
+				<th>Year</th>
+				<th>Cost</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tr data-ng-repeat="item in items" data-ng-cloak>
+			<td>{{item.username}}</td>
+			<td>{{item.location}}</td>
+			<td>{{item.brand}}</td>
+			<td>{{item.model}}</td>
+			<td>{{item.year}}</td>
+			<td>{{item.cost | currency}}</td>
+			<td><div id="data-table-links" data-ng-if="item.username == session">
+				<a data-ng-click = viewItem(item.itemOfferingId)>View</a>
+				<a data-ng-click = editItem(item.itemOfferingId)>Edit</a>
+				<a data-ng-click = deleteItem(item.itemOfferingId)>Delete</a>
+			</div></td>
+		</tr>
+	</table>
+	</div>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 
+<div id="data-panel">
+		<div id="data-panel-header" >
+			<ul class="data-panel-rows">
+				<li class="data-li-width">Member</li>
+				<li class="data-li-width">Location</li>
+				<li class="data-li-width">Brand</li>
+				<li class="data-li-width">Model</li>
+				<li class="data-li-width">Year</li>
+				<li class="data-li-width">Cost</li>
+			</ul>
+		</div>
+		<div id="data-panel-content">
+			<ul class="data-panel-rows" >
+				<li class="data-li-width">{{member}}</li>
+				<li class="data-li-width">{{location}}</li>
+				<li class="data-li-width">{{brand}}</li>
+				<li class="data-li-width">{{model}}</li>
+				<li class="data-li-width">{{year}}</li>
+				<li class="data-li-width">{{cost}}</li>
+				<li id="test">	
+						<a>View</a>
+						<a>Edit</a>
+						<a>Delete</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	-->
+
+		<!--  <div id="menu" class="navbar navbar-default">
+			<div class="navbar-header">
+				
+					<ul id="lnavbar" class="col-lg-12 col-md-12 xol-sm-12 col-xs-12 nav navbar-nav navbar-left">
+						<li class="nav"><div>Member</div></li>
+						<li class="nav"><div>Location</div></li>
+						<li class="nav"><div>Brand</div></li>
+						<li class="nav"><div>Model</div></li>
+						<li class="nav"><div>Year</div></li>
+						<li class="nav"><div>Cost</div></li>
+					</ul>
+			</div>
+		</div>
+		
+		<div id="database-menu" class="navbar navbar-default">
+			<div class="navbar-header">
+					<ul id="lnavbar" class="col-lg-12 col-md-12 xol-sm-12 col-xs-12 nav navbar-nav navbar-left">
+						<li class="nav"><div>{{member}}</div></li>
+						<li class="nav"><div>{{location}}</div></li>
+						<li class="nav"><div>{{brand}}</div></li>
+						<li class="nav"><div>{{model}}</div></li>
+						<li class="nav"><div>{{year}}</div></li>
+						<li class="nav"><div>{{cost}}</div></li>
+					</ul>
+			</div>
+			<div>
+					<ul id="rnavbar" class="nav navbar-nav navbar-right">
+						<li class="nav"><a href="#">More</a></li>
+						<li class="nav"><a href="#">View</a></li>
+						<li class="nav"><a href="#">Edit</a></li>
+						<li class="nav"><a href="#">Delete</a></li>
+					</ul>
+			</div>
+
+		</div>	-->
+		
+		
+	
+</section>
+
+
+ 

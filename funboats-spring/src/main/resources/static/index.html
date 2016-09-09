@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html data-ng-app="funBoatsApp" lang="en" >
 <head>
     <meta http-equiv="content-type" content="text/html" lang="en"/>
     <meta content="David G. Godi" name="Author" />
@@ -9,24 +9,28 @@
     <link rel="stylesheet" type="text/css" href="css/funBoats.css" />
 </head>
 
-<body data-ng-app="funBoatsApp" data-ng-cloak>
+<body >
 
-<div id="page" data-ng-controller="MainController" data-ng-cloak>
-	
-	<header class="container">
+<div id="page" data-ng-controller="MainController" >
+
+	<header class="container" data-ng-cloak>
 		<funboats-header id="headerContent" />
 	</header>
 	
-	<nav class="container">
+	<nav class="container" data-ng-cloak>
 		<funboats-navbar id="navbarContent"/>
+	</nav>
+	
+	<nav class="container" data-ng-cloak>
+		<funboats-member id="memberContent"/>
 	</nav>
 
 	<section class="container" >	
 		<div id="main" class="col-md-12 col-sm-12 col-xs-12" data-ng-style="{'background-color':mainbgstyle}">	
 			
-			<div id="main-body" data-ng-view></div>
+			<div id="main-body" data-ng-view data-ng-cloak></div>
 			
-			<div id="img-collection" class="row visible-lg visible-md">
+			<div id="img-collection" class="row visible-lg visible-md" data-ng-cloak>
 				<ul class="nav nav-justified">
 		    		<li class="text-center">
 		    			<div>
@@ -37,85 +41,90 @@
 		    		<li class="text-center">
 		    			<div>
 		    				<h4>Add Jet Ski</h4>
-		    				<a href="" ><img src="images/small_Image1.jpg"></a>	
+		    				<a href="add" ><img src="images/small_Image1.jpg"></a>	
 		    			</div>
 		    		</li>
 		 			<li class="text-center">
 		    			<div>
 		    				<h4>Find A Jet Ski</h4>
-		    				<a href="findJetSki"><img src="images/small_Image1.jpg"></a>	
+		    				<a href="viewJetSki"><img src="images/small_Image1.jpg"></a>	
 		    			</div>
 		    		</li>
 		  		</ul>
 			</div>	
 							
 		</div><!-- end main -->
-		
-		<div class="row hidden-lg hidden-md hidden-xs">
+	 	
+		<div class="row hidden-lg hidden-md hidden-xs" data-ng-cloak> 
 				<ul class="nav nav-justified">
 		    		<li class="text-center">
 		    			<div>
 		    				<h2>View</h2>
-		    				<img src="images/glyph-view.png">	
+		    				<a href="viewJetSki"><img src="images/glyph-view.png"></a>
 		    			</div>	
 		    		</li>
 		    		<li class="text-center">
 		    			<div>
 		    				<h2>Add</h2>
-		    				<img src="images/glyph-add.png">	
+		    				<a href="add"><img src="images/glyph-add.png"></a>	
 		    			</div>
 		    		</li>
 		 			<li class="text-center">
 		    			<div>
 		    				<h2>Search</h2>
-		    				<img src="images/glyph-search.png">	
+		    				<a href="viewJetSki"><img src="images/glyph-search.png"></a>	
 		    			</div>
 		    		</li>
 		  		</ul>
 			</div>			  
 	</section><!-- end body -->
-			
-	<div id="img-collection-xs" class="row-fluid visible-xs ">
+		
+	<div id="img-collection-xs" class="row-fluid visible-xs " data-ng-cloak>
 			<div class="col-xs-2 col-xs-offset-3" >
 				<div><h4 class="text-center">View</h4></div>
-				<img src="images/glyph-view.png" class="img-responsive"/>
+				<a href="viewJetSki"><img src="images/glyph-view.png" class="img-responsive"/></a>
 			</div>
 				
 			<div class="col-xs-2 ">
 				<div><h4 class="text-center">Add</h4></div>
-				<img src="images/glyph-add.png" class="img-responsive"/>
+				<a href="add"><img src="images/glyph-add.png" class="img-responsive"/></a>
 			</div>
 				
 			<div class="col-xs-2 ">
 				<div><h4 class="text-center">Find</h4></div>
-				<img src="images/glyph-search.png" class="img-responsive"/>
+				<a href="viewJetSki"><img src="images/glyph-search.png" class="img-responsive"/></a>
 			</div>
 		</div>
+
 	
 	<footer class="container">
 		<funboats-footer class="container"/>
 	</footer>	
-		
 	
 </div>
 
-
+ 
 	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	
 	<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
 	<script type="text/javascript" src="/webjars/angularjs/angular-resource.min.js"></script>
-	<script type="text/javascript" src="/webjars/angularjs/angular-route.min.js"></script>  
+	<script type="text/javascript" src="/webjars/angularjs/angular-route.min.js"></script> 
+	<script type="text/javascript" src="/webjars/angularjs/angular-animate.min.js"></script>
 	<script type="text/javascript" src="/webjars/angularjs/angular-sanitize.min.js"></script>
-	<script type="text/javascript" src="/webjars/angularjs/angular-messages.js"></script>
+	<script type="text/javascript" src="/webjars/angularjs/angular-messages.min.js"></script>
 	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/ripples.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/material.min.js"></script>
 	<script type="text/javascript" src="/js/app.js"></script>
-	<script type="text/javascript" src="/js/controllers/controllers.js"></script>
-	<script type="text/javascript" src="/js/controllers/userController.js"></script>
-	<script type="text/javascript" src="/js/controllers/loginController.js"></script>
 	<script type="text/javascript" src="/js/services.js"></script>
 	<script type="text/javascript" src="/js/directives.js"></script>
+	<script type="text/javascript" src="/js/lib/http-auth-interceptor.js"></script>
+	<script type="text/javascript" src="/js/lib/colors.js"></script>
+	<script type="text/javascript" src="/js/controllers/controllers.js"></script>
+	<script type="text/javascript" src="/js/controllers/resgistration-controller.js"></script>
+	<script type="text/javascript" src="/js/controllers/login-controller.js"></script>
 	<script type="text/javascript" src="/js/controllers/member-controllers.js"></script>
-	<script type="text/javascript" src="/js/misc.js"></script>
-	
+
 </body>
 </html>

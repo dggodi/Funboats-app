@@ -1,0 +1,100 @@
+<div class="form-group">
+						<div class="form-group"	>
+						<label><span class="form-required">*</span>Brand:</label>
+							<select data-ng-model="event.brand" 
+    							data-ng-options="brand as brand.brand for brand in brands"></select> 	    
+					</div>
+					
+					<div class="form-group"	>
+						<label><span class=" form-required">*</span>Model:</label>
+							
+						    	<input type="text" id="model" class="form-control" required 
+						    	name='modelInput' data-ng-pattern="/^[A-Za-z]{3,20}|[0-9]$/" 
+						    	data-ng-model="event.model">	    
+					</div>
+					<div class="form-group">
+						<label><span class=" form-required">*</span>Year:</label>
+    					<select data-ng-model="event.year" required  
+    							data-ng-options="year as year.year for year in years"></select> 
+					</div>
+					<div class="form-group">
+						<label><span class=" form-required">*</span>Cost:</label>
+    					<select data-ng-model="event.cost" 
+    							data-ng-options="cost as (cost.cost | currency) for cost in costs"></select> 
+					</div>
+					<div class="form-group">
+						<label><span class=" form-required">*</span>Location:</label>
+    					<select data-ng-model="event.location"  
+    							data-ng-options="location as location.location for location in locations"></select> 
+					</div>
+					
+					<div class="form-group">
+						<label><span class=" form-required">*</span>Create a detailed description of your jet ski:</label>
+    					<div>
+    						<textarea name="descript" id="descript" data-ng-model="event.descript" required rows="4" cols="50" ></textarea>
+    					</div>	
+    				</div>
+    				<div id="searchBox">
+    					<p>Filling the rest of the form is optional.</p>
+    				</div>
+					
+					<div class="form-group"	>
+						<label>Color:</label>
+							<select data-ng-model="event.item.color" 
+    							data-ng-options="color as color.color for color in colors"></select> 	    
+					</div>
+					
+					<div class="form-group">
+						<label for="categoryInput" >Category:</label>
+    					<select data-ng-model="event.item.category" 
+    					data-ng-options="category as category.category for category in categories"></select> 
+					</div>
+					
+					<div class="form-group">
+						<label for="seatingInput" >Seating:</label>
+    					<select data-ng-model="event.item.seating" 
+    					data-ng-options="seating as seating.seating for seating in seatings"></select> 
+					</div>
+					
+					<div class="form-group"	>
+						<label>Hours:</label>
+							<select data-ng-model="event.item.hour" 
+    							data-ng-options="hour as hour.hour for hour in hours"></select> 	    
+					</div>
+					
+					<div class="form-group"	>
+						<label>Fuel Capacity:</label>
+							<select data-ng-model="event.item.fuel" 
+    							data-ng-options="fuel as fuel.fuel for fuel in fuels"></select> 	    
+					</div>
+					
+					<div class="form-group"	>
+						<label>Displacement:</label>
+							<select data-ng-model="event.item.displacement" 
+    							data-ng-options="displacement as displacement.displacement for displacement in displacements"></select> 	    
+					</div>
+					
+					<div class="form-group"	>
+						<label>Engine:</label>
+						<input type="text" id="engine" class="form-control" data-ng-pattern="/^[A-Za-z]{3,20}$/"
+							name='engineInput' data-ng-model="event.item.engine">	    
+					</div>
+
+					<div class="form-group"	>
+						<label>Pump Type:</label>
+						<input type="text" id="pump" class="form-control" data-ng-pattern="/^[A-Za-z]{3,20}$/"
+							name='pumpInput' data-ng-model="event.item.pumpType">	    
+					</div>
+
+					<div class="form-group"	>
+						<label>Vin Number:</label>
+						<input type="text" id="vin" class="form-control" data-ng-pattern="/^[A-Za-z0-9]{10,20}$/"
+							name='vinInput' data-ng-model="event.item.vinNo">	    
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-success" data-ng-disabled="itemForm.$invalid" 
+								class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-success" data-ng-click="cancel()" >Cancel</button>
+					</div>
+					</div>

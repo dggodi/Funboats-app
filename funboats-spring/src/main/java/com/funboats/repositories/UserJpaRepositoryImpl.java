@@ -1,104 +1,114 @@
 package com.funboats.repositories;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.funboats.model.SearchObject;
 import com.funboats.model.User;
+import com.funboats.repositories.maps.UserRowMapper;
 
-@Controller
+@Repository
 public class UserJpaRepositoryImpl implements  UserRepository{
 	
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/**
+	 * inject DataSource into jdbcTemplate
+	 * @param dataSource is the DB source
+	 */
 	@Autowired
-	private PlatformTransactionManager transactionManager;
-	
-	 
-    public UserJpaRepositoryImpl(DataSource dataSource) {
+	public UserJpaRepositoryImpl(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
     
-	@Override
-	public User findByUserName(String username) {
-		String sql = "SELECT user_name FROM users WHERE user_name = ?";
-		Object[] params = {username};
-		List<User> user = jdbcTemplate.query(sql,  params, new RowMapper<User>(){
+	/**
+	 * return total count of rows in users
+	 * @return Long
+	 */
+    public Long getCount(){
+    	String sql = "SELECT COUNT(*) FROM users";
+    	return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+    
+    /**
+     * return true if username is found in users
+     * @param obj represents username
+     * @return boolean
+     */
+    public boolean uniqueUserName(SearchObject obj){
+    	String sql = "SELECT * FROM users u, profiles p, authorities a WHERE u.user_name = ?";
+	           sql += " and u.user_id = p.profile_id";
+	    
+	    Object[] params = {obj.getSearch()};
+	    
+	    boolean found = false;
+	    try{
+    		found = jdbcTemplate.queryForObject(sql, params, new UserRowMapper()) != null; 			
+    	}catch(Exception e){}
+    	
+    	return found;	 
+    }
+    
+    /**
+     * return User if username is found in users
+     * @param username is the name of user
+     * @return User
+     */
+    public User findByUserName(String username){
 
-			public User mapRow(ResultSet rs, int row) throws SQLException {
-				User user = new User();
-				user.setUserName(rs.getNString("user_name"));
-				return null;
-			}
-		});
-		return user.get(0);
-	}
+    	if (username == null)
+			return null;
+   	
+    	String sql = "SELECT * FROM users u, profiles p, authorities a WHERE u.user_name = ?";
+    	       sql += " and u.user_id = p.profile_id";
+    	       
+    	Object[] params = {username};
+    	User user = jdbcTemplate.queryForObject(sql, params, new UserRowMapper());
+    	
+    	return user; 
 
-	public ResponseEntity<User> saveAndFlush(User user) {
-		TransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
-		TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
-		ResponseEntity<User> responseEntity;
+    }
+
+    /**
+     * return true if save was succesful 
+     * @params user object being saved
+     * @return boolean
+     */
+    @Transactional
+	public boolean saveAndFlush(User user) {
+
+		int success = 0;
+		String sql = "INSERT INTO profiles (first_name, last_name, phone_number, mobile_number) VALUES (?,?,?,?);";
+			
+		Object[] params = {
+			user.getProfile().getFirstName(),
+			user.getProfile().getLastName(),
+			user.getProfile().getPhoneNumber(),
+			user.getProfile().getMobileNumber()
+		};	
+		success = jdbcTemplate.update(sql, params);
+
+		user.setPassword(User.encryptPassword(user.getPassword()));	
 		
-		try{
-			String sqlprofile = "INSERT INTO profiles (first_name, last_name, phone_number, mobile_number) VALUES (?,?,?,?);";
-			String sqluser = "INSERT INTO profiles (user_name, user_password, user_role) VALUES (?,?,?);";
+		sql = "INSERT INTO users (user_name, user_password, enabled, authority_id) VALUES (?,?,?,?);";
+		params = new Object[]{
+			user.getUsername(), 
+			user.getPassword(), 
+			user.getEnabled(), 1L
+		};
 			
-			Object[] params = {
-				user.getProfile().getFirstName(),
-				user.getProfile().getLastName(),
-				user.getProfile().getPhoneNumber(),
-				user.getProfile().getMobileNumber()
-			};
+		success = jdbcTemplate.update(sql, params);
 			
-			int ck = jdbcTemplate.update(sqlprofile, params);
-			System.out.println("UserJpaRepositoryImpl :: saveAndFlush profile   " + ck);
-			
-			params = new Object[]{
-				user.getUserName(), user.getPassword(), user.getRole()
-			};
-			
-			int ck1 = jdbcTemplate.update(sqluser, params);
-			
-			System.out.println("UserJpaRepositoryImpl :: saveAndFlush user    " + ck1);
-			responseEntity = new ResponseEntity<>(HttpStatus.OK);
-			transactionManager.commit(status);
-			
-		}catch (Exception e){
-			transactionManager.rollback(status);
-			responseEntity = new ResponseEntity<>(HttpStatus.CONFLICT);
-		}
-		
-		return responseEntity;	
+		System.out.println("UserJpaRepositoryImpl :: saveAndFlush 3");
+		return (success > 0);
 	}
-	
-	public User authenticate(String userName, String password){
-		String sql = "select username from users where user_name=? and user_password=?";
-		Object[] params = {userName, password};
-		List<User> user = jdbcTemplate.query(sql, params, new RowMapper<User>(){
-			public User mapRow(ResultSet rs, int row) throws SQLException{
-				User user = new User();
-				user.setUserName(rs.getString("user_name"));
-				user.setUserName(rs.getString("user_password"));
-				return user;
-			}
-		});
-		return user.get(0);
-	}
-
 }
 
 	

@@ -1,36 +1,33 @@
 package com.funboats.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-//@Entity
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
+
+/**
+ * class for user object
+ */
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	
-	private String userName;
+	private String username;
 	private String password;
-	private String role;
+	public boolean enabled;
+	private Date updatedAt;
+	private Set<Authority> authorities = new HashSet<>();
+	
 	private Profile profile;
 	
-	public User(){}
-	
-	public User(User user) {
-		this.userId = user.userId;
-		this.userName = user.userName;
-		this.password = user.password;
-	}
-
-	public User(long userId, String userName, String password) {
-		this.userId = userId;
-		this.userName = userName;
-		this.password = password;
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -39,12 +36,12 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userNamee) {
-		this.userName = userNamee;
+	public void setUsername(String usernamee) {
+		this.username = usernamee;
 	}
 
 	public String getPassword() {
@@ -54,13 +51,13 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getRole() {
-		return role;
+		
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public Profile getProfile() {
@@ -70,5 +67,34 @@ public class User implements Serializable {
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
+
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
+	/**
+     * return the generated encrypted password
+     * @param password
+     * @return String
+     */
+    public static String encryptPassword(String password)
+    {
+    	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	return passwordEncoder.encode(password);
+    }
+	
+	
 }
 

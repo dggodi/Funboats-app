@@ -1,13 +1,13 @@
 package com.funboats.repositories;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.funboats.model.SearchObject;
 import com.funboats.model.User;
 
 @Repository
 public interface UserRepository{
-	ResponseEntity<User> saveAndFlush(User user);
-	User authenticate(String userName, String password);
+	boolean saveAndFlush(User user);
 	User findByUserName(String username);	
+	boolean uniqueUserName(SearchObject obj);
 }

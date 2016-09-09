@@ -9,12 +9,18 @@ body {margin-top:105px;
 }
 
 label {color:black}
+ul {margin:0px; }
+a {cursor:pointer; }
+a:hover {text-decoration:none}
 
 button{padding:5px; border:2px solid #090; color:#FFFFFF;
 -webkit-border-radius: 5px;
 border-radius: 5px; background-color:#393;
 box-shadow:2px 2px 3px 1px #060 inset; 
+
 }
+
+input[type=text] {background-color:white;!important}
 
 /* fixed bar ***********************************************/
 #top-bar {background-color:black; padding-right: 20px; padding-bottom:10px}
@@ -26,7 +32,6 @@ box-shadow:2px 2px 3px 1px #060 inset;
 
 #login-sm div{margin:15px}
 #login-sm button {margin-right:20px}
-#login-sm a:hover {}
 #login-sm a:link{color:#CCC}
 #login-sm a:visited{color:#CCC}
 #login-sm a:hover{color:black; text-decoration:none}
@@ -38,12 +43,24 @@ box-shadow:2px 2px 3px 1px #060 inset;
 #lnavbar li {border-right: 1px solid rgb(153,153,153);}
 #rnavbar li {border-left: 1px solid rgb(153,153,153);}
 
-#menu a {color:white; text-transform:uppercase; padding: 7px 17px 0px 17px;}
+#menu {color:white}
+#menu a {text-transform:uppercase; padding: 7px 17px 0px 17px;}
 #menu a:link{color:#CCC}
 #menu a:visited{color:#CCC}
 #menu a:hover{color:#FC0}
 #menu a:active{color:#FC0}
 
+/* member navbar */
+#member-menu {margin-top: -20px; padding:20px 20px 0px 20px; background-color: #333; border-right: 2px solid black;}
+#member-menu-left {float:left}
+#member-menu-right {float:right; margin-left: 40px}
+#member-search-location {float:right; margin-top: -20px;padding-right:40px}
+
+/* drop down*/
+ul.nav li:hover > ul.dropdown-menu {
+   display: block;
+   background-color:#ccc
+}
 
 /* main *****************************************************/
 #main {margin-top:-20px; margin-bottom:40px; padding:0px 20px 20px 30px; border:1px solid #FFF;  
@@ -63,12 +80,15 @@ box-shadow:2px 2px 3px 1px #060 inset;
 #form-search-button {display: inline-block; }
 #search-header {color:#ccc; text-align:center}
 #search-panel-text {text-align:center}
+#range-slider {color:#930}
 
 #img-collection {margin-top:40px; padding-top:40px}
 #img-collection img {margin-top:40px; padding-top:40px; background-color:#666666; border:2px solid #666; -webkit-border-radius: 5px;}
 #img-collection h4 {color:#CCCCCC; text-align:center; position: absolute; left:60px; top:40px}
 #img-collection-xs {padding-bottom:40px}
 
+
+/* footer */
 footer div {margin-top:40px; clear:left}
 #footer-lg {float:right; margin-top:20px}
 #footer-sm p {padding-top:60px; text-align:center;}
@@ -79,15 +99,81 @@ footer div {margin-top:40px; clear:left}
      
 .panel-default > .panel-heading-form {background-color:#666; color:white;} 
 .panel > .panel-tranparent {background-color:red;}
+.form-message {display: inline-block}
+#signUpPanel {padding-bottom:30px}
+#signUpPanel a {color:black; text-decoration:none}
+#login-lg a:link{color:black}
+#login-lg a:visited{color:black}
+#login-lg a:hover{color:#666;}
+#login-lg a:active{color:#666}
 
+/* validation */
 .correctInput {background-color:white; color:black}
-.wrongInput {background-color:yellow; color:red}  
+.wrongInput {background-color:yellow; color:red} 
+ input.ng-invalid.ng-dirty {background-color:yellow; color:red}
 
-.password-strong {background-color:#00cc00; width:200px; height:20px}
-.password-medium {background-color:#ff6600; width:100px; height:20px}
-.password-weak {background-color:#cc0000; width:50px; height:20px} 
+/* password meter */
+.password-strong 	{background-color:#00cc00; width:200px; height:20px}
+.password-medium 	{background-color:#ff6600; width:100px; height:20px}
+.password-weak 		{background-color:#cc0000; width:50px; height:20px} 
 
-#password-block {margin-top:80px}
-#password-block-sm {margin-top:20px; margin-bottom:20px}
+#password-block 	{margin-top:80px}
+#password-block-sm 	{margin-top:20px; margin-bottom:20px}
+
+
+/* view items */
+#view-panel {padding-bottom:40px; padding-top: 20px; border-top: 2px solid gray;
+}
+
+#view-panel-img img {margin: 20px 0px 40px -20px;  
+	border: 1px solid #000000;box-shadow: 4px 6px 8px rgba(0,0,0,.75);
+}
+
+#view-panel-body {margin-bottom:20px; color:black}
+#view-panel-body h4 {color:#C60; font-weight:bold }
+#view-panel-body span {color:#666;font-weight:bold }
+#view-panel-body ul{list-style:square}
+#view-panel-body li{color:#333}
+#view-panel-footer {margin:20px}
+#header-left {position: absolute; left: 0; margin-left:20px}
+#header-right {position: absolute; right: 0; margin-right:50px}
+#subheader {margin: 40px 40px 10px 0px; padding-top:15px; border-top: 2px solid #000}
+
+/* members */
+#member-welcome {margin-top: -20px; margin-left:-40px}
+#searchBox p {padding:20px; background-color:#CCCCCC; color:#333; 
+	-webkit-border-radius: 5px; border-radius: 5px; border:3px solid #999; 
+}
+
+
+/* data table */
+#data-table {border-left: 2px solid gray; border-right: 2px solid black; 
+	border-bottom: 2px solid black}
+#data-table th {color:white; background-color: #333; }
+#data-table td {border-right: 1px solid black;border-bottom: 1px solid black;}
+#data-table div {text-align:right}
+#data-table a {
+	padding-left: 10px; padding-right: 10px;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-size: 0.7em;
+	color:black;
+	border-right: 1px solid rgb(153,153,153);	
+}
+#data-table-links a:link{color:black}
+#data-table-links a:visited{color:black}
+#data-table-links a:hover{color:white}
+#data-table-links a:active{color:white}
+
+.table-striped tr:nth-child(even) {background-color: #ccc;}
+.table-striped  tr:nth-child(odd) {background-color:#fff;}
+.table-hover tbody tr:hover td{background-color: #008040;}
+
+
+
+
+
+
+
 
 

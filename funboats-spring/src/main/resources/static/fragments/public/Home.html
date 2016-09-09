@@ -1,4 +1,4 @@
-			<section id="leftSideBar" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<section id="leftSideBar" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				
 				<div class="row panel visible-md visible-lg">
 					<div id="imgCarousel" class="carousel slide" data-interval="4000">
@@ -39,45 +39,50 @@
 						<hr />
 						<div class="row">
 							<form name="searchEventForm" class="form-horizontal">
+	
+						    	<div class="form-group"	>
+									<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Brand</label>
+									<div class="col-lg-7 col-md-7  col-sm-8 col-xs-8">
+									<select data-ng-model="event.brand" 
+    										data-ng-options="brand as brand.brand for brand in brands"></select> 	    
+									</div>
+								</div>
+								
 								<div class="form-group">
-						    		<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Brand</label>
+									<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">PWC Category</label>
 						    		<div class="col-lg-7 col-md-7  col-sm-8 col-xs-8">
-							    		<select class="control-label form-group" data-ng-model="event.brand" >
-							    			<option value="Yamaha">Yamaha</option>
-							                <option value="Honda">Honda</option>
-							                <option value="Kawasaki">Kawasaki</option>
-							                <option value="Sea-Doo">Sea-Doo</option>
-							    		</select>
-						    		</div>
-						    	</div>
-						    	<div class="form-group">
-						    		<label class="control-label col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">PWC Category</label>
-						    		<div class="col-lg-7 col-md-7  col-sm-8 col-xs-8">
-						    			<select class="control-label form-group" data-ng-model="event.capacity" >
-						    				<option value="Passenger Standup">Passenger Standup</option>
-							                <option value="1 Passenger Runabout">1 Passenger</option>
-							                <option value="2 Passenger Runabout">2 Passenger</option>
-							                <option value="2-3 Passenger Runabout">2-3 Passenger</option>
-						    			</select>
-						    		</div>
-						    	</div>
+    								<select data-ng-model="event.category" 
+    								data-ng-options="category as category.category for category in categories"></select> 
+									</div>
+								</div>
+								
 						    	<div class="form-group"	>
 						    		<label for="yearInput" class="control-label col-md-2 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Year</label>
 						    		<div class="col-md-8  col-sm-8 col-xs-8 ">	
-						    			<input type="range" id="myYear" class="form-control" data-ng-model="event.year" name='yearInput' min="2000" max="2014">
+						    			<input type="range" id="product-year" class="form-control" data-ng-model="event.year" 
+						    				name='yearInput' min="2000" max="2016" data-ng-change="rangeYear(event)">
 						    		</div>
 						    	</div>
 						    	
-						    	<div class="form-group"	>
+						    	<div id="range-slider" class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-8 col-xs-offset-3">
+						    		{{event.year}}
+						    	</div>
+						    	
+						    	<div class="form-group"	data-range-slider >
 						    		<label for="costInput" class="control-label col-md-2 col-md-offset-1 col-sm-2 col-xs-2 col-xs-offset-1">Cost</label>
 						    		<div class="col-md-8  col-sm-8 col-xs-8 ">
-						    			<input type="range" id="myRange" name="costInput" data-ng-model="event.cost" class="form-control">
+						    			<input type="range" id="product-cost" class="form-control" data-ng-model="event.cost" 
+						    				name="costInput" min="1000" max="20000" data-ng-change="rangeCost(event)">
 						    		</div>
-						    	</div>	
+						    	</div>
+						    		
+						    	<div id="range-slider" class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-8 col-xs-offset-3">
+						    		{{event.cost}}<p></p>
+						    	</div>
 							</form>
 						</div>
 						<hr />
-						<button type="submit" class="btn btn-success" data-ng-click="searchEvent(event, searchEventForm)">Search</button>
+						<button type="submit" class="btn btn-success" data-ng-click="searchFilterEvent()">Search</button>
 					</div>	
 			</section>	
 			<section class="col-lg-12 col-md-12 xol-sm-12 col-xs-12">
@@ -95,18 +100,4 @@
 					for used personal watercrafts that are private owned.
 				</p>
 				</div>
-			</section>
-<!--  <div data-ng-controller="IndexController" data-ng-cloak class="ng-cloak">
-  <p>The ID is {{greeting.id}}</p>
-  <p>The content is {{greeting.content}}</p>
-</div>-->
-<div>
-	<ul>
-		<li data-ng-repeat="user in users">
-			<div>
-				<span>name:{{user.userName}}</span><br/>
-				<span>password:{{user.password}}</span>
-			</div>
-		</li>
-	</ul>
-</div>
+			</section> 

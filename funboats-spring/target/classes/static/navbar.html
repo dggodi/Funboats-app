@@ -1,11 +1,11 @@
-	
-		<div id="login-sm" class="visible-xs">
-					<div>
+
+		<div id="login-sm" class="visible-xs" data-ng-show="!authenticated">
+					<div data-ng-controller="LoginController as main">
 						<form name="mainHeaderLogin">
-							<div><input type="text" id="username" data-ng-model="main.username" class="form-control" placeholder="a@yahoo.com"></div>
-							<div><input type="password" id="password" data-ng-model="main.password" class="form-control" placeholder="Password"></div>
-							<div><button type="submit" data-ng-click="loginEvent(main, mainHeaderLogin)" class="btn btn-success">Submit</button>
-							<a href="signUp">SignUp</a><span> | </span><a href="#">Forgot Password</a>
+							<div><input type="text" id="username" data-ng-model="event.username" class="form-control" placeholder="user"></div>
+							<div><input type="password" id="password" data-ng-model="event.password" class="form-control" placeholder="password"></div>
+							<div><button type="submit" data-ng-click="loginEvent(event, mainHeaderLogin)" class="btn btn-success">Submit</button>
+							<a href="signUp">SignUp</a><span> | </span><a href="forgot">Forgot Password</a>
 							</div>
 						</form>
 					</div>
@@ -17,12 +17,14 @@
 						<li class="nav"><a href="/">Home</a></li>
 						<li class="nav"><a href="viewJetSki">Water Crafts</a></li>
 						<li class="nav"><a href="aboutContent">Company</a></li>
+						<li class="nav" data-ng-show="authenticated"><a href="view">View</a></li>
+						<li class="nav" data-ng-show="authenticated"><a href="add">Add</a></li>
 					</ul>
 				</div>
 			</div>
 				<div class="navbar-collapse collapse">
 					<ul id="rnavbar" class="nav navbar-nav navbar-right">
-						<li class="nav"><a href="signUp">Sign Up</a></li>
+						<li data-ng-hide="authenticated" class="nav"><a href="signUp">Sign Up</a></li>
 					</ul>
 				</div>
 				<button class="btn btn-success navbar-toggle"

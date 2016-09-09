@@ -1,26 +1,38 @@
 package com.funboats.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Profile {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int profile_id;
+/**
+ * class for user description
+ */
+public class Profile implements Serializable {
+
+	private static final long serialVersionUID = 536023297645701806L;
+
+	private Long profile_id;
 	
 	private String firstName; 
 	private String lastName;
+	private String email;
 	private String phoneNumber;
 	private String mobileNumber;
-	public int getProfile_id() {
+	private Date updatedAt;
+	
+	
+	public Long getProfile_id() {
 		return profile_id;
 	}
-	public void setProfile_id(int profile_id) {
+	public void setProfile_id(Long profile_id) {
 		this.profile_id = profile_id;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -34,6 +46,13 @@ public class Profile {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -46,5 +65,12 @@ public class Profile {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 
 }

@@ -1,0 +1,46 @@
+<div data-ng-show="authenticated" data-ng-controller = "MemberMainController">
+	<div id="member-menu" class="navbar navbar-default">				
+		
+		<div id="member-menu-left">    
+			<nav class="navbar navbar-default " role="navigation">
+				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+					<ul class="nav navbar-nav">              
+						<li class="dropdown" >
+					    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{event.user}}<b class="caret"></b></a>  
+					        <ul class="dropdown-menu">
+					        	<li><a href="#">My account</a></li>
+								<li class="divider"></li>
+								<li><a href="logout">Log Off</a></li>  
+							</ul>
+					    </li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+					
+		<div id="member-menu-right">    
+			<nav class="navbar navbar-default " role="navigation">
+				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+					 <ul class="nav navbar-nav">              
+					     <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentLocation}}<b class="caret"></b></a>  
+					        <ul class="dropdown-menu">
+					          	<li data-ng-click = viewByLocation(location.name) data-ng-repeat="location in event.locations"><a href="#">{{location.name}}</a></li>                          
+					        </ul>
+					     </li>
+					 </ul>
+				</div>
+			</nav>
+		</div>					
+		<div id="member-menu-right" >
+			<form name="searchOneEventForm" >
+				<div id="form-search-button"><input type="text" name="searchInput" data-ng-model="event.searchContent" size="15"></div>		
+				<button type="submit" class="btn btn-success" data-ng-click="viewBySearch(event)">Go</button>
+			</form>
+		</div>	
+	</div>
+</div>
+
+
+
+    

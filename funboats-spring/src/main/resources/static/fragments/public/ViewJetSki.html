@@ -1,3 +1,4 @@
+<div class="row">
 <section id="section-layout-left" class="col-lg-6 col-md-7 col-sm-12">
 
 	<h2 id="page-title">View Jet Ski</h2>
@@ -14,19 +15,56 @@
 </section>
 
 <section id="section-layout-left" class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-1 col-sm-12 ">
-<div class="panel panel-default panel-tranparent">
-					<div class="panel-body ">
-						
-						<div class="panel panel-bg panel-body-border">
-							<p id="search-panel-text" class="panel-body">Can't find a Water Craft. <br />Customize your search below.</p>
-						</div>
-						<div>
-							<form name="searchOneEventForm">
-								<div><h4><label>Search</label></h4></div>
-								<div id="form-search-button"><input type="text" name="searchInput" data-ng-model="event.searchContent" size="15"></div>		
-								<button type="submit" class="btn btn-success" data-ng-click="searchEvent(event, searchOneEventForm)">Go</button>
-							</form>
-						</div>
-					</div>
-				</div>	
-</section>	
+	<div class="panel panel-default panel-tranparent">
+		<div class="panel-body ">				
+			<div class="panel panel-bg panel-body-border">
+				<p id="search-panel-text" class="panel-body">Can't find a Water Craft. <br />Customize your search below.</p>
+			</div>
+			<div>
+				<form name="searchOneEventForm" data-ng-controller="MainController">
+					<div><h4><label>Search</label></h4></div>
+					<div id="form-search-button"><input type="text" name="searchInput" data-ng-model="event.searchContent" size="15"></div>		
+					<button type="submit" class="btn btn-success" data-ng-click="searchEvent(event)">Go</button>
+				</form>
+			</div>
+		</div>
+	</div>	
+</section>
+</div>
+
+
+<section>
+
+	<div id="view-panel" data-ng-repeat="i in items" data-ng-cloak>
+		<div id="view-panel-img" class="col-lg-4 col-med-4 col-sm-12 col-xs-12">
+			<img src="images/small_Image1.jpg">
+		</div>
+		<div id="view-panel-body" class="col-lg-8 col-med-8 col-sm-12 col-xs-12">
+			<div class="hidden-xs">
+				<div id="header-left"><h4><span>USED &nbsp</span>{{i.model}} &nbsp {{i.brand}}</h4></div>
+				<div id="header-right"><h4>{{i.cost | currency}}</h4></div>
+			</div>
+			<div class="visible-xs">
+				<div><h4><span>USED &nbsp</span>{{i.model}} &nbsp {{i.brand}}</h4></div>
+				<div><h4>{{i.cost | currency}}</h4></div>
+			</div>
+			<div id="subheader">
+				<p><strong>{{item.hours}} hours ........................... {{item.displacement}} cc</strong></p>
+			</div>
+			<ul class="col-lg-4 col-med-4 col-sm-6 col-xs-6">
+				<li><span>Color: </span>{{i.item.color}}</li>
+				<li><span>Type: </span>{{i.item.category}}</li>
+				<li><span>Seating: </span>{{i.item.seating}}</li>
+				<li><span>Vin: </span>{{i.item.vinNo}}</li></ul>
+					  
+			<ul class="col-lg-4 col-med-4 col-sm-5 col-xs-5">
+				<li><span>Engine: </span>{{i.item.engine}}</li> 
+				<li><span>pumpType: </span>{{i.item.pumpType}}</li>
+				<li><span>Fuel Capacity: </span>{{i.item.fuelcapacity}}</li></ul>
+		</div> 
+		<div id="view-panel-footer">
+			<p>Description:&nbsp; {{i.item.descript}}</p>
+		</div>
+		<button type="submit" class="btn btn-success" data-ng-click="event.back()">Back</button>
+	</div>
+</section>
